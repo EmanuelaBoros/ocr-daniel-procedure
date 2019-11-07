@@ -34,9 +34,29 @@
 
 * Either keep images and xml files and move them to another directory, or remove them using the following commands:
 > find \<OCR-ed documents Directory\> -name "\*.\<Image-Extension\>" -type f -exec rm {} \;
-> find \<OCR-ed documents Directory\> -name "\*.\<Image-Extension\>" -type f -exec rm {} \;
+> find \<OCR-ed documents Directory\> -name "\*.xml" -type f -exec rm {} \;
 
 * Remove unecessary blank lines ("by-product" of Tesseract-OCR):
 > ./post-processing.sh \<OCR-ed documents Directory\>
 
 Note: This script uses sed. Because of this, modify it to match the version of sed your system is using
+
+## Experiment with DAniEL
+
+### Putting the noisy corpus into DAniEL
+
+* Make sure that documents location matches of that described in the corpus file
+* Run the following script to start process the whole corpus:
+> ./daniel-loop.sh \<Dataset Directory\>
+What this script will do is loop through each level of noise, assuming that you have different directories for different level (and you should), and process the whole corpus with cut-off ratio ranging from 0 to 0.99 with 0.1 increment
+* There will be an output file for each language, containing annotations made by DAniEL and evaluations comparing to the groundtruth file, which will show number of TP, TN, FP, FN, and calculate Recall, Precision, and F1-score 
+
+### Process the result, and plot ROC
+
+* Run this script to process output files of previous step
+> ./roc-stat.sh \<Directory Containing DAniEL Output File\> \<Language Code\>
+
+* To plot the ROC curves based on stats that were extracted:
+> python3.7 numpy_plot.py \<Dataset Directory\> \<Noise Folder Family\> \<Language Code\>
+
+
