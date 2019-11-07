@@ -37,7 +37,7 @@
 > find \<OCR-ed documents Directory\> -name "\*.xml" -type f -exec rm {} \;
 
 * Remove unecessary blank lines ("by-product" of Tesseract-OCR):
-> ./post-processing.sh \<OCR-ed documents Directory\>
+> ./post-process.sh \<OCR-ed documents Directory\>
 
 Note: This script uses sed. Because of this, modify it to match the version of sed your system is using
 
