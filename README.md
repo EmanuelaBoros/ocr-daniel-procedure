@@ -3,6 +3,7 @@
 ## Dataset
 
 * 2089 documents in 5 languages: English, Greece, Polish, Russian, Chinese
+* 2733 documents in French
 * Documents are separated in different folders via languages 
 * Corpus files are also divided based on languages
 * 1 large corpus file that include every articles
@@ -11,7 +12,7 @@
 
 ### Text-2-Image conversion
 
-* Convert text files to images using [text2ImgDoc](https://github.com/nnkhoa/text2ImgDoc)
+* Convert text files to images using [text2ImgDoc](https://github.com/nnkhoa/text2ImgDoc) script
 * View README.md for detailed instruction
 
 ### OCR-Noise Generation
@@ -33,8 +34,8 @@
 > ./rename.sh \<OCR-ed documents Directory\> \<Extension To Be Removed\>
 
 * Either keep images and xml files and move them to another directory, or remove them using the following commands:
-> find \<OCR-ed documents Directory\> -name "\*.\<Image-Extension\>" -type f -exec rm {} \;
-> find \<OCR-ed documents Directory\> -name "\*.xml" -type f -exec rm {} \;
+> find \<OCR-ed documents Directory\> -name "\*.\<Image-Extension\>" -type f -exec rm {} \\;
+> find \<OCR-ed documents Directory\> -name "\*.xml" -type f -exec rm {} \\;
 
 * Remove unecessary blank lines ("by-product" of Tesseract-OCR):
 > ./post-process.sh \<OCR-ed documents Directory\>
@@ -48,6 +49,7 @@ Note: This script uses sed. Because of this, modify it to match the version of s
 * Make sure that documents location matches of that described in the corpus file
 * Run the following script to start process the whole corpus:
 > ./daniel-loop.sh \<Dataset Directory\>
+
 What this script will do is loop through each level of noise, assuming that you have different directories for different level (and you should), and process the whole corpus with cut-off ratio ranging from 0 to 0.99 with 0.1 increment
 * There will be an output file for each language, containing annotations made by DAniEL and evaluations comparing to the groundtruth file, which will show number of TP, TN, FP, FN, and calculate Recall, Precision, and F1-score 
 
