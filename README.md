@@ -28,7 +28,7 @@
 * Installation instruction: [Here](https://github.com/tesseract-ocr/tesseract/wiki)
 * [Download](https://github.com/tesseract-ocr/tessdata_best) the appropriate language model
 * Run "Script-Name-Here" to start the OCR process:
-> ./tesseract-new.sh \<Noisy Data Directory\> \<Path to Tesseract language model\>
+``` ./tesseract-new.sh Noisy Data Directory Path to Tesseract language model```
 
 * Rename all output files and remove all suffixes to match file names from the corpus
 > ./rename.sh \<OCR-ed documents Directory\> \<Extension To Be Removed\>
