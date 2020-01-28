@@ -28,17 +28,21 @@
 * Installation instruction: [Here](https://github.com/tesseract-ocr/tesseract/wiki)
 * [Download](https://github.com/tesseract-ocr/tessdata_best) the appropriate language model
 * Run "Script-Name-Here" to start the OCR process:
-``` ./tesseract-new.sh Noisy Data Directory Path to Tesseract language model```
+
+``` ./tesseract-new.sh Noisy_Data_Directory_Path to Tesseract_language_model```
 
 * Rename all output files and remove all suffixes to match file names from the corpus
-> ./rename.sh \<OCR-ed documents Directory\> \<Extension To Be Removed\>
+
+```./rename.sh OCR-ed_documents_Directory Extension_To_Be_Removed```
 
 * Either keep images and xml files and move them to another directory, or remove them using the following commands:
-> find \<OCR-ed documents Directory\> -name "\*.\<Image-Extension\>" -type f -exec rm {} \\;
-> find \<OCR-ed documents Directory\> -name "\*.xml" -type f -exec rm {} \\;
+
+```find OCR-ed_documents_Directory -name "\*.Image-Extension" -type f -exec rm {} \\;```
+```find OCR-ed_documents_Directory -name "\*.xml" -type f -exec rm {} \\;```
 
 * Remove unecessary blank lines ("by-product" of Tesseract-OCR):
-> ./post-process.sh \<OCR-ed documents Directory\>
+
+```./post-process.sh OCR-ed_documents_Directory```
 
 Note: This script uses sed. Because of this, modify it to match the version of sed your system is using
 
@@ -48,7 +52,8 @@ Note: This script uses sed. Because of this, modify it to match the version of s
 
 * Make sure that documents location matches of that described in the corpus file
 * Run the following script to start process the whole corpus:
-> ./daniel-loop.sh \<Dataset Directory\>
+
+```./daniel-loop.sh Dataset_Directory```
 
 What this script will do is loop through each level of noise, assuming that you have different directories for different level (and you should), and process the whole corpus with cut-off ratio ranging from 0 to 0.99 with 0.1 increment
 * There will be an output file for each language, containing annotations made by DAniEL and evaluations comparing to the groundtruth file, which will show number of TP, TN, FP, FN, and calculate Recall, Precision, and F1-score 
@@ -56,9 +61,11 @@ What this script will do is loop through each level of noise, assuming that you 
 ### Process the result, and plot ROC
 
 * Run this script to process output files of previous step
-> ./roc-stat.sh \<Directory Containing DAniEL Output File\> \<Language Code\>
+
+```./roc-stat.sh Directory_Containing_DAniEL_Output_File Language_Code```
 
 * To plot the ROC curves based on stats that were extracted:
-> python3.7 numpy_plot.py \<Dataset Directory\> \<Noise Folder Family\> \<Language Code\>
+
+```python numpy_plot.py Dataset_Directory Noise_Folder_Family Language_Code```
 
 
