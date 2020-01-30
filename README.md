@@ -6,7 +6,7 @@
 * 2733 documents in French
 * Documents are separated in different folders via languages 
 * Corpus files are also divided based on languages
-* 1 large corpus file that include every articles
+* 1 large corpus file that includes every article
 
 ## OCR-Noise Injection
 
@@ -22,7 +22,7 @@
 * Phantom Character is not recommended since changes are quite insignificant and has very little impact
 * Use Batch Mode (Factory icon) and select Semi-Synthetic option to start converting a pre-existing directory of images
 
-## OCR Noisy images back to text file
+## OCR Noisy images back to a text file
 
 * OCR Engine: [Tesseract](https://github.com/tesseract-ocr/tesseract)
 * Installation instruction: [Here](https://github.com/tesseract-ocr/tesseract/wiki)
@@ -51,16 +51,16 @@ Note: This script uses sed. Because of this, modify it to match the version of s
 ### Putting the noisy corpus into DAniEL
 
 * Make sure that documents location matches of that described in the corpus file
-* Run the following script to start process the whole corpus:
+* Run the following script to start to process the whole corpus:
 
 ```./daniel-loop.sh Dataset_Directory```
 
-What this script will do is loop through each level of noise, assuming that you have different directories for different level (and you should), and process the whole corpus with cut-off ratio ranging from 0 to 0.99 with 0.1 increment
-* There will be an output file for each language, containing annotations made by DAniEL and evaluations comparing to the groundtruth file, which will show number of TP, TN, FP, FN, and calculate Recall, Precision, and F1-score 
+What this script will do is loop through each level of noise, assuming that you have different directories for different level (and you should), and process the whole corpus with a cut-off ratio ranging from 0 to 0.99 with 0.1 increment
+* There will be an output file for each language, containing annotations made by DAniEL and evaluations comparing to the ground-truth file, which will show the number of TP, TN, FP, FN, and calculate Recall, Precision, and F1-score 
 
 ### Process the result, and plot ROC
 
-* Run this script to process output files of previous step
+* Run this script to process output files of the previous step
 
 ```./roc-stat.sh Directory_Containing_DAniEL_Output_File Language_Code```
 
