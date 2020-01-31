@@ -1,18 +1,8 @@
 # Manual for re-creating DAniEL-OCR experiment
 
-## Dataset
-
-* 2089 documents in 5 languages: English, Greece, Polish, Russian, Chinese
-* 2733 documents in French
-* Documents are separated in different folders via languages 
-* Corpus files are also divided based on languages
-* 1 large corpus file that includes every article
-
-## OCR-Noise Injection
-
 ### Text-2-Image conversion
 
-* Convert text files to images using [text2ImgDoc](https://github.com/nnkhoa/text2ImgDoc) script
+* Convert text files to images using .. script
 * View README.md for detailed instruction
 
 ### OCR-Noise Generation
@@ -24,25 +14,30 @@
 
 ## OCR Noisy images back to a text file
 
-* OCR Engine: [Tesseract](https://github.com/tesseract-ocr/tesseract)
 * Installation instruction: [Here](https://github.com/tesseract-ocr/tesseract/wiki)
 * [Download](https://github.com/tesseract-ocr/tessdata_best) the appropriate language model
-* Run "Script-Name-Here" to start the OCR process:
+* Run "run_tesseract.sh" to start the OCR process:
 
-``` ./tesseract-new.sh Noisy_Data_Directory_Path to Tesseract_language_model```
+``` ./run_tesseract.sh IMAGE_DIRECTORY -l LANGUAGE```
+
+For the preffered languages, install:
+``` sudo apt-get install tesseract-ocr-eng  #for english
+sudo apt-get install tesseract-ocr-tam  #for tamil
+sudo apt-get install tesseract-ocr-deu  #for deutsch (German)
+``` 
 
 * Rename all output files and remove all suffixes to match file names from the corpus
 
-```./rename.sh OCR-ed_documents_Directory Extension_To_Be_Removed```
+```./rename.sh TEXT_DIRECTORY EXTENSION```
 
 * Either keep images and xml files and move them to another directory, or remove them using the following commands:
 
-```find OCR-ed_documents_Directory -name "\*.Image-Extension" -type f -exec rm {} \\;```
-```find OCR-ed_documents_Directory -name "\*.xml" -type f -exec rm {} \\;```
+```find TEXT_DIRECTORY -name "\*.IMAGE_EXTENSION" -type f -exec rm {} \\;```
+```find TEXT_DIRECTORY -name "\*.xml" -type f -exec rm {} \\;```
 
 * Remove unecessary blank lines ("by-product" of Tesseract-OCR):
 
-```./post-process.sh OCR-ed_documents_Directory```
+```./post-process.sh TEXT_DIRECTORY```
 
 Note: This script uses sed. Because of this, modify it to match the version of sed your system is using
 
